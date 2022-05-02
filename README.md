@@ -1,6 +1,6 @@
 
 ## Description
-This is a front-end side of the technical test that follows the requirement with the [Figma design](https://www.figma.com/proto/pynjT5AsIQ2GH5z9HnVZfb/Test?node-id=1%3A2&starting-point-node-id=1%3A2) it is connected with the deployed version of the [backend API](https://github.com/MohammedAlghazali/functional-text-backend). 
+This is a front-end side of the technical test that follows the requirement with the [Figma design](https://www.figma.com/proto/pynjT5AsIQ2GH5z9HnVZfb/Test?node-id=1%3A2&starting-point-node-id=1%3A2), check the live version [here](https://functional-test-front.netlify.app/), it is connected with the deployed version of the [backend API](https://github.com/MohammedAlghazali/functional-text-backend). 
 
 
 ## Built With

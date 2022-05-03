@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import Header from '../../layouts/Header/Header';
 import { Heading } from '../../components/Typography';
 
 import { formatPhoneNumber } from '../../helpers/registerHelpers';
+import { HOME_PAGE_URL } from '../../constants/url.constants';
 
 import { ReactComponent as MessageIcon } from '../../assets/images/message.svg';
 
@@ -13,8 +14,15 @@ import * as Style from './style';
 
 const RegistrationInfo = () => {
   const location: any = useLocation();
+  const navigate = useNavigate();
 
-  const { firstName, phoneNumber, email } = location?.state?.data?.data;
+  const { firstName, phoneNumber, email } = location?.state?.data?.data || {};
+
+  useEffect(() => {
+    if (!firstName || !phoneNumber || !email) {
+      navigate(HOME_PAGE_URL);
+    }
+  }, []);
 
   return (
     <Style.Container>

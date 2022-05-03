@@ -191,7 +191,7 @@ const Register = () => {
             </Style.ValidationError>
           )}
           <LoadingButton
-            disabled={!isValid && phoneNumberError.isValid}
+            disabled={!isValid && !phoneNumberError.isValid}
             sx={{ opacity: !isValid ? '50%' : '' }}
             loadingIndicator={<CircularProgress color="inherit" size={21} />}
             onClick={handleSubmit(submitHandler)}

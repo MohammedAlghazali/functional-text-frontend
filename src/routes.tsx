@@ -1,10 +1,11 @@
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Loading from './components/Loading';
+import { RouteInterface } from './interfaces/RouteInterface';
 
 import { HOME_PAGE_URL, REGISTRATION_INFO_URL } from './constants/url.constants';
 
-export const renderRoutes = (routes: any = []) => (
+export const renderRoutes = (routes: RouteInterface[]) => (
   <Suspense fallback={<Loading />}>
     <Routes>
       {routes.map((route: any) => {

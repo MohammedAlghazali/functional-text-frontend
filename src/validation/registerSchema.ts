@@ -11,7 +11,6 @@ const registerSchema = yup.object().shape({
       'Oops! You need a password longer than 8 characters with numbers and letters.',
     )
     .required(),
-  phoneNumber: yup.string().max(14).required(),
 });
 
 export default registerSchema;

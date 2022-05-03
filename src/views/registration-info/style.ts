@@ -1,4 +1,5 @@
 import { styled } from '@mui/material/styles';
+import { Paragraph } from '../../components/Typography';
 
 export const Container = styled('div')(() => ({
   display: 'flex',
@@ -17,18 +18,6 @@ export const MessageHeader = styled('div')(() => ({
   letterSpacing: '0.8px',
 }));
 
-export const MessageHeaderContent = styled('div')(() => ({
-  display: 'flex',
-  flexWrap: 'wrap',
-  fontSize: '22px',
-  lineHeight: '29px',
-  p: {
-    width: '95%',
-    margin: '0',
-    textAlign: 'left',
-  },
-}));
-
 export const MessageIconWrapper = styled('div')(() => ({
   marginRight: '18px',
   height: '100%,',
@@ -36,19 +25,8 @@ export const MessageIconWrapper = styled('div')(() => ({
   alignItems: 'center',
 }));
 
-export const MessageContent = styled('div')(({ theme }) => ({
-  display: 'flex',
-  flexWrap: 'wrap',
+export const MessageContent = styled(Paragraph)(() => ({
   p: {
-    color: theme.palette.grey[400],
-    fontSize: '15px',
-    lineHeight: '21px',
-    textAlign: 'left',
-    marginBottom: '6px',
-    maxWidth: '395px',
-    letterSpacing: '0.8px',
-    marginTop: '0',
-    width: '100%',
     '&:nth-child(2)': {
       maxWidth: '400px',
       marginTop: '15px',

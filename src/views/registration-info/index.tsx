@@ -3,6 +3,7 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 import Header from '../../layouts/Header/Header';
+import { Heading } from '../../components/Typography';
 
 import { formatPhoneNumber } from '../../helpers/registerHelpers';
 
@@ -22,14 +23,14 @@ const RegistrationInfo = () => {
         <Style.MessageIconWrapper>
           <MessageIcon />
         </Style.MessageIconWrapper>
-        <Style.MessageHeaderContent>
+        <Heading>
           <p>
             Thanks,
             {firstName}
             !
           </p>
           <p> We’ve received your application</p>
-        </Style.MessageHeaderContent>
+        </Heading>
       </Style.MessageHeader>
       <Style.MessageContent>
         <p>

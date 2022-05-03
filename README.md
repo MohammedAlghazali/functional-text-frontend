@@ -47,3 +47,6 @@ npm run start
 ```
 
 5- Your app is running now on [http://localhost:3000](http://localhost:3000)
+
+### Deployment
+The project is deployed on [netlify](netlify.com), the preview version is deployed when you create a new pull request, and the production deploys trigger after merge the branch to the main.

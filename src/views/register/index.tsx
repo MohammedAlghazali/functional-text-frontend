@@ -18,7 +18,6 @@ import createUserApi from '../../api/createUser';
 import registerSchema from '../../validation/registerSchema';
 import {
   capitalizeFirstCharacter,
-  unCapitalizeFirstCharacter,
   formatPhoneNumber,
 } from '../../helpers/registerHelpers';
 import { REGISTRATION_INFO_URL } from '../../constants/url.constants';
@@ -152,7 +151,7 @@ const Register = () => {
             InputProps={{ disableUnderline: true }}
             label="Email"
             variant="filled"
-            value={unCapitalizeFirstCharacter(email)}
+            value={email ? email.toLowerCase() : ''}
           />
           {errors.email && (
             <Style.ValidationError>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
@@ -19,6 +19,7 @@ import registerSchema from '../../validation/registerSchema';
 import {
   capitalizeFirstCharacter,
   formatPhoneNumber,
+  clearPhoneNumberFormatting,
 } from '../../helpers/registerHelpers';
 import { REGISTRATION_INFO_URL } from '../../constants/url.constants';
 
@@ -28,8 +29,20 @@ import * as Style from './style';
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState({ message: '', isValid: false });
+
   const [shrink, setShrink] = React.useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const phoneLength = phoneNumber.length;
+    if (phoneLength < 11 && phoneLength >= 1) {
+      setPhoneNumberError({ isValid: false, message: 'Phone number should be 10 numbers' });
+    } else {
+      setPhoneNumberError({ message: '', isValid: false });
+    }
+  }, [phoneNumber]);
 
   const {
     register,
@@ -44,13 +57,12 @@ const Register = () => {
 
   const firstName = watch('firstName');
   const lastName = watch('lastName');
-  const phoneNumber = watch('phoneNumber');
   const email = watch('email');
 
   const submitHandler = async (values: any) => {
     try {
       setLoading(true);
-      const response = await createUserApi(values);
+      const response = await createUserApi({ ...values, phoneNumber });
       if (response.status === 201) {
         reset();
         navigate(REGISTRATION_INFO_URL, {
@@ -113,9 +125,8 @@ const Register = () => {
             </Style.NameValidationContainer>
           )}
           <TextField
-            {...register('phoneNumber')}
-            className={`${errors.phoneNumber ? 'validation-error' : ''}`}
-            error={errors.phoneNumber}
+            className={`${phoneNumberError.isValid ? 'validation-error' : ''}`}
+            error={phoneNumberError.isValid}
             InputLabelProps={{ shrink }}
             InputProps={{
               disableUnderline: true,
@@ -133,15 +144,22 @@ const Register = () => {
             }}
             label="Phone number"
             variant="filled"
-            value={
-              phoneNumber?.length === 10
-                ? formatPhoneNumber(phoneNumber)
-                : phoneNumber
-            }
+            onKeyDown={(event) => {
+              const isBackspaceKey = event.key === 'Backspace';
+              if (isBackspaceKey) {
+                event.preventDefault();
+                setPhoneNumber(phoneNumber?.substring(0, phoneNumber.length - 1));
+              }
+            }}
+            onChange={(e) => {
+              const unFormattedNumber = clearPhoneNumberFormatting(e.target.value);
+              setPhoneNumber(unFormattedNumber);
+            }}
+            value={formatPhoneNumber(phoneNumber)}
           />
-          {errors.phoneNumber && (
+          {phoneNumberError.message && (
             <Style.ValidationError>
-              {errors.phoneNumber.message}
+              {phoneNumberError.message}
             </Style.ValidationError>
           )}
           <TextField
@@ -173,7 +191,7 @@ const Register = () => {
             </Style.ValidationError>
           )}
           <LoadingButton
-            disabled={!isValid}
+            disabled={!isValid && phoneNumberError.isValid}
             sx={{ opacity: !isValid ? '50%' : '' }}
             loadingIndicator={<CircularProgress color="inherit" size={21} />}
             onClick={handleSubmit(submitHandler)}

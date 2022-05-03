@@ -174,6 +174,7 @@ const Register = () => {
           )}
           <LoadingButton
             disabled={!isValid}
+            sx={{ opacity: !isValid ? '50%' : '' }}
             loadingIndicator={<CircularProgress color="inherit" size={21} />}
             onClick={handleSubmit(submitHandler)}
             loading={loading}
